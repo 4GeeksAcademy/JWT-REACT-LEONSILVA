@@ -80,15 +80,26 @@ def serve_any_other_file(path):
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
+    user = User()
+    
     if data is None:
         return jsonify({"msn": "no se ah encontrado un body o no formato JSON valido"}), 400
     if "email" not in data:
         return jsonify({"msn": "no se ah encontrado un email en el body"}), 400
     if "password" not in data:
         return jsonify({"msn": "no se ah encontrado un password en el body"}), 400
-    user = User()
+    if "name" not in data:
+        return jsonify({"msn": "no se ah encontrado un name en el body"}), 400
+    if "edad" not in data:
+        return jsonify({"msn": "no se ah encontrado un edad en el body"}), 400
+    if "description" not in data:
+        return jsonify({"msn": "no se ah encontrado un description en el body"}), 400
+    
     user.email = data["email"]
     user.password = data["password"]
+    user.name = data["name"]
+    user.edad = data["edad"]
+    user.description = data["description"]
     user.is_active = True
 
     access_token = create_access_token(identity=user.email)

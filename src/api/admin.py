@@ -6,7 +6,7 @@ from flask_admin.contrib.sqla import ModelView
 
 class UserModelView(ModelView):
     column_auto_select_related = True
-    column_list = ['id','email','is_active']
+    column_list = ['id','email','name','edad','description','is_active']
 
 def setup_admin(app):
     app.secret_key = os.environ.get('FLASK_APP_KEY', 'sample key')
