@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+}
+
+main {
+    width: 100vw;
+    height: 84vh;
+}
+
+.nav-size {
+    height: 8vh;
+    background-color: grey;
+}
+
+.footer-size{
+    width: 100vw;
+    height: 8vh;
+    background-color: grey;
+}

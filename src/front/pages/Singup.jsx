@@ -4,7 +4,9 @@ import React from "react";
 export const Singup = () => {
   return (
     <>
-      <h1>Page para poner el signup y un button de login</h1>
+      <main>
+        <h1>Esta es la pagina que se encargará del Singup</h1>
+      </main>
     </>
   )
 };
