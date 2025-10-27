@@ -14,22 +14,21 @@ export const Navbar = () => {
 				</button>
 				<div className="collapse navbar-collapse" id="navbarNav">
 					{store.is_login ?(
-						<h1>Usuario: username</h1>
+						<h5 className="ms-auto">Usuario: username</h5>
 					):( 		
 					<ul className="navbar-nav ms-auto me-4">
 						<li className="nav-item">
 							<Link to={"/login"} classNameName="navbar-brand ">
-								<button classNameName="mt-2 rounded">Login</button>
+								<button className="mt-2 rounded fs-5 me-4">Login</button>
 							</Link>
 						</li>
 						<li className="nav-item">
 							<Link to={"/"} className="navbar-brand ">
-								<button className="mt-2 rounded">Signup</button>
+								<button className="mt-2 rounded fs-5">Signup</button>
 							</Link>
 						</li>
 					</ul>
 					)}
-					
 				</div>
 			</div>
 		</nav>

@@ -17,3 +17,10 @@ main {
     height: 8vh;
     background-color: grey;
 }
+
+.form-box{
+    width: 50vw;
+    height: 50vh;
+    margin: auto;
+    margin-top: 10%;
+}

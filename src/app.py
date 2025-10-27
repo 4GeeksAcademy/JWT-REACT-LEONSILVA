@@ -10,6 +10,7 @@ from api.models import db, User
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from flask_cors import CORS
 
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -23,6 +24,9 @@ static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../dist/')
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+
+CORS(app) # ESTO ES LO QUE PERMITE QUE DATOS SENSIBLES PUEDAN SER RECIBIDOS Y SER MANEJADOS
+        # LO TENIAMOS EN API PORQUE ESTE TEMPLATE ESTABA PENSADO PARA PONER LOS ENDPOINTS EN API NO EN APP
 
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = os.getenv('GETKEY')  # key= secret_key!
