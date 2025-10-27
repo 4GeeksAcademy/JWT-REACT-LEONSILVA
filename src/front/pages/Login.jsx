@@ -23,15 +23,7 @@ export const Login = () => {
     event.preventDefault()
     const response =  await LoginUserFetch({"email":email,"password":password})
     if (response){
-      dispatch({
-        type: 'setKey',
-        payload: {setKeyObj: response.JWT}
-      })
-      
-      dispatch({
-        type: 'setInfoUser',
-        payload: {setInfoUserObj: response.user}
-      })
+      localStorage.setItem("token",response.JWT)
       setErrorMsn(null)
       navigate("/protected")
     }

@@ -23,3 +23,27 @@ export const LoginUserFetch = async (userdata) => {
     console.error("Error al hacer login:", error);
   }
 };
+
+export const getUserDataProtected = async (jwtToken) => {
+  try {
+    const response = await fetch(`${url}/protected`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${jwtToken}`
+        }
+      });
+      
+      if (!response.ok){
+        console.error("peticion fallida:",response.status)
+        return null
+      }
+
+      const data =  await response.json()
+      console.log(data)
+      return data 
+  } catch (error) {
+    console.error("Error al obtener los datos:", error);
+  }
+};

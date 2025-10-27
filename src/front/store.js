@@ -1,8 +1,6 @@
 export const initialStore=()=>{
   return{
-    is_login: false,
-    jwtKey: "",
-    infoUser: []
+    is_login: false
   }
 }
 
@@ -14,16 +12,6 @@ export default function storeReducer(store, action = {}) {
         ...store,
         is_login: action.payload.is_login_or_not
       };
-    case 'setKey':
-      return{
-        ...store,
-        jwtKey: action.payload.setKeyObj
-      }
-    case 'setInfoUser':
-        return{
-          ...store,
-          infoUser: action.payload.setInfoUserObj
-        }
     default:
       throw Error('Unknown action.');
   }    

@@ -145,7 +145,11 @@ def login():
 def protected():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
-    return jsonify(logged_in_as=current_user), 200
+    user = User.query.filter_by(email=current_user).first()
+    return jsonify({
+        "looged_by":current_user,
+        "user": user.serialize()
+    }), 200
 
 
 # this only runs if `$ python src/main.py` is executed
