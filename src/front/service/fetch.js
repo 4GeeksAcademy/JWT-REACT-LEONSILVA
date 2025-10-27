@@ -2,7 +2,6 @@ import React from "react";
 const url = import.meta.env.VITE_BACKEND_URL;
 
 export const LoginUserFetch = async (userdata) => {
-  console.log(userdata);
   try {
     const response = await fetch(`${url}/login`,
       {
@@ -12,8 +11,13 @@ export const LoginUserFetch = async (userdata) => {
         },
         body: JSON.stringify(userdata),
       });
+      
+      if (!response.ok){
+        console.error("Login fallido:",response.status)
+        return null
+      }
+
       const data =  await response.json()
-      console.log(data)
       return data 
   } catch (error) {
     console.error("Error al hacer login:", error);

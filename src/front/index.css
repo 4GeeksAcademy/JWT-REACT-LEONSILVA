@@ -19,8 +19,12 @@ main {
 }
 
 .form-box{
-    width: 50vw;
-    height: 50vh;
+    width: 100vw;
+    height: 84vh;
+    display: flex;
+}
+
+.login-size{
     margin: auto;
-    margin-top: 10%;
+    width: 40%;
 }
