@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx"
+import { useEffect } from "react";
+
 
 export const Navbar = () => {
 
-	const {store,dispatch} = useGlobalReducer()
+	const navigate = useNavigate()
 
 	return (
 		<nav className="navbar nav-size navbar-expand-lg bg-body-tertiary">
@@ -13,21 +15,27 @@ export const Navbar = () => {
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarNav">
-					{store.is_login ?(
-						<h5 className="ms-auto">Usuario: username</h5>
-					):( 		
-					<ul className="navbar-nav ms-auto me-4">
-						<li className="nav-item">
-							<Link to={"/login"} classNameName="navbar-brand ">
-								<button className="mt-2 rounded fs-5 me-4">Login</button>
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link to={"/"} className="navbar-brand ">
-								<button className="mt-2 rounded fs-5">Signup</button>
-							</Link>
-						</li>
-					</ul>
+					{localStorage.getItem("isLogin") ? (
+						<div>
+							<button className="btn btn-primary" onClick={()=>{
+								localStorage.removeItem("isLogin")
+								localStorage.removeItem("token")
+								localStorage.removeItem("userDataObj")
+								navigate("/login")
+							}}>END SESSION</button>
+						</div>):(
+						<ul className="navbar-nav ms-auto me-4">
+							<li className="nav-item">
+								<Link to={"/login"} classNameName="navbar-brand ">
+									<button className="mt-2 rounded fs-5 me-4">Login</button>
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link to={"/"} className="navbar-brand ">
+									<button className="mt-2 rounded fs-5">Signup</button>
+								</Link>
+							</li>
+						</ul>
 					)}
 				</div>
 			</div>

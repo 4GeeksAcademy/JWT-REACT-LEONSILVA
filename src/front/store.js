@@ -1,6 +1,6 @@
 export const initialStore=()=>{
   return{
-    is_login: false
+    //is_login: false
   }
 }
 

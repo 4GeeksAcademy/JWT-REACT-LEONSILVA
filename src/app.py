@@ -140,14 +140,33 @@ def login():
     }), 200
 
 
+@jwt.expired_token_loader
+def expired_token_callback(jwt_header, jwt_payload):
+    return jsonify({
+        "msg": "Token expirado. Por favor, inicia sesión de nuevo."
+    }), 401
+
+@jwt.invalid_token_loader
+def invalid_token_callback(error):
+    return jsonify({
+        "msg": "Token inválido. Por favor, inicia sesión de nuevo."
+    }), 401
+
+@jwt.unauthorized_loader
+def missing_token_callback(error):
+    return jsonify({
+        "msg": "Falta el token de autorización."
+    }), 401
+
+
+# --- Ruta protegida ---
 @app.route("/protected", methods=["GET"])
 @jwt_required()
 def protected():
-    # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
     return jsonify({
-        "looged_by":current_user,
+        "logged_by": current_user,
         "user": user.serialize()
     }), 200
 

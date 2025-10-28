@@ -24,6 +24,7 @@ export const Login = () => {
     const response =  await LoginUserFetch({"email":email,"password":password})
     if (response){
       localStorage.setItem("token",response.JWT)
+      localStorage.setItem("isLogin", true)
       setErrorMsn(null)
       navigate("/protected")
     }
@@ -34,37 +35,47 @@ export const Login = () => {
 
   return(
     <>
-      <main>
-        <div className="form-box">  
-          <form action="/login" method="POST" className="login-form login-size">
-            <h2>Iniciar sesión</h2>
-            <label for="email">Correo electrónico:</label>
+      <main>  
+        <form className="login-form login-size" onSubmit={(e) => { e.preventDefault(); sendInfo(); }}>
+          <h2>Iniciar sesión</h2>
+
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Correo electrónico:</label>
             <input 
               type="email" 
               id="email" 
               name="email" 
               placeholder="Tu correo"  
+              className="form-control"
               onChange={handleChangesEmail}
               required
             />
-            <label for="password">Contraseña:</label>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Contraseña:</label>
             <input 
               type="password" 
               id="password" 
               name="password" 
               placeholder="Tu contraseña"
+              className="form-control"
               onChange={handleChangesPassword} 
               required
             />
-            <button type="submit" onClick={sendInfo}>Entrar</button>
-            <p>¿No tienes cuenta? <Link to={"/"}> <p>Regístrate aquí</p></Link></p>
-            {errorMsn ? (
-              <p>{errorMsn}</p>
-            ):(
-              null
-            )}
-          </form>
-        </div>
+          </div>
+
+          <button type="submit" className="btn btn-primary" onClick={sendInfo}>Entrar</button>
+
+          <p className="mt-3">
+            ¿No tienes cuenta?{" "}
+            <Link to={"/"}>
+              <span>Regístrate aquí</span>
+            </Link>
+          </p>
+
+          {errorMsn && <p className="text-danger">{errorMsn}</p>}
+        </form>
       </main>
     </>
   )
